@@ -5,6 +5,15 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/4.5.1/userguide/tutorial_java_projects.html
  */
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
 
 plugins {
     // Apply the java plugin to add support for Java
@@ -14,8 +23,9 @@ plugins {
     id 'application'
 }
 
+apply plugin: 'javafx-gradle-plugin'
+
 // Define the main class for the application
-mainClassName = 'gces.App'
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
@@ -37,5 +47,20 @@ dependencies {
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
+    mavenLocal()
+    mavenCentral()
+
     jcenter()
 }
+
+jfx {
+
+    // minimal requirement for jfxJar-task
+    mainClass = 'gces.App'
+
+    // minimal requirement for jfxNative-task
+    vendor = 'Pradish Bijukchhe'
+
+    // for a full list of available settings, look the class "JavaFXGradlePluginExtension" on plugin project
+}
+

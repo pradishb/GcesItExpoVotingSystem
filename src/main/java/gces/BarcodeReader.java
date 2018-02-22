@@ -15,7 +15,7 @@ public class BarcodeReader{
     private static final int MIN_BARCODE_LENGTH = 8;
 
     private final StringBuffer barcode = new StringBuffer();
-    private final List<BarcodeListener> listeners = new CopyOnWriteArrayList<BarcodeListener>();
+    private final List<BarcodeListener> listeners = new CopyOnWriteArrayList<>();
     private long lastEventTimeStamp = 0L;
 
     public BarcodeReader() {
