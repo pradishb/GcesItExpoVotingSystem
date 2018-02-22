@@ -2,21 +2,27 @@ package gces;
 
 public class Vote {
     private String userKey;
-    private String voterKey;
+    private String projectKey;
 
     public String getUserKey() {
         return userKey;
     }
 
+    public Vote(String userKey, String projectKey) {
+        this.userKey = userKey;
+        this.projectKey = projectKey;
+    }
+
     public void setUserKey(String userKey) {
+
         this.userKey = userKey;
     }
 
-    public String getVoterKey() {
-        return voterKey;
+    public String getprojectKey() {
+        return projectKey;
     }
 
-    public void setVoterKey(String voterKey) {
-        this.voterKey = voterKey;
+    public void setprojectKey(String projectKey) {
+        this.projectKey = projectKey;
     }
 }
