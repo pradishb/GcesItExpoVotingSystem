@@ -15,7 +15,12 @@ import javafx.scene.text.Text;
  *
  * @author pradish
  */
+
+interface UserFoundListener{
+    public void onUserFound(User user, String userKey);
+}
 public class TextViewController implements Initializable, BarcodeListener{
+    private static UserFoundListener listener;
 
     @FXML
     private Text label;
@@ -66,9 +71,14 @@ public class TextViewController implements Initializable, BarcodeListener{
         }
         else{
             App.screenController.activate("voting_view");
+            listener.onUserFound(new User(100, "Pradish", "9814133236"), "xxxx");
             label.setText("Please check your internet connectivity.");
         }
 
+    }
+
+    public static void setUserFoundListener(UserFoundListener listener){
+        TextViewController.listener = listener;
     }
 
 }

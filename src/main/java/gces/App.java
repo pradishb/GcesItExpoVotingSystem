@@ -12,9 +12,6 @@ import java.io.IOException;
 public class App extends Application{
     static ScreenController screenController;
     static Scene scene;
-    static User currentUser;
-    static String currentUserKey;
-    static String currentProjectKey;
 
     public static void main(String[] args) {
         BarcodeReader x = new BarcodeReader();
