@@ -9,7 +9,7 @@ interface BarcodeListener{
 }
 
 public class BarcodeReader{
-    private static final long THRESHOLD = 10;
+    private static final long THRESHOLD = 1200;
     private static final int MIN_BARCODE_LENGTH = 8;
 
     private static final StringBuffer barcode = new StringBuffer();
