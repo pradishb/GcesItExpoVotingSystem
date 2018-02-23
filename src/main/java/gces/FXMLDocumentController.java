@@ -1,9 +1,5 @@
 package gces;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,10 +7,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 /**
@@ -38,8 +32,6 @@ public class FXMLDocumentController implements Initializable, BarcodeListener{
         label.setText("Your barcode is : " + barcode + "\nConnecting to database...");
 
         if(InternetChecker.internetAvailable()) {
-            App.screenController.activate("voting_view");
-
             DatabaseReference ref = FirebaseEngine.database.getReference("users");
 
             ValueEventListener postListener = new ValueEventListener() {
@@ -59,10 +51,8 @@ public class FXMLDocumentController implements Initializable, BarcodeListener{
                     }
                     if (found) {
                         App.screenController.activate("voting_view");
-//                    text.setText("Barcode found.\nKey : " + key + "\nName : " + name);
-                        ;
                     } else {
-//                    text.setText("Barcode not found.");
+                        label.setText("Barcode not found.");
                     }
                 }
 
@@ -75,6 +65,7 @@ public class FXMLDocumentController implements Initializable, BarcodeListener{
             ref.addListenerForSingleValueEvent(postListener);
         }
         else{
+            App.screenController.activate("voting_view");
             label.setText("Please check your internet connectivity.");
         }
 
