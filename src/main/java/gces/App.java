@@ -29,11 +29,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 
-public class App extends Application implements BarcodeListener{
+public class App extends Application{
     private Text text;
     private Button btn;
     private ListView<String> list = new ListView<>();
-    private ScreenController screenController;
+    static ScreenController screenController;
+    static Scene scene;
 
     public static void main(String[] args) {
         BarcodeReader x = new BarcodeReader();
@@ -47,18 +48,15 @@ public class App extends Application implements BarcodeListener{
 
 
         try {
-
             StackPane root = new StackPane();
-            Scene scene = new Scene(root);
+            scene = new Scene(root);
             screenController = new ScreenController(scene);
             screenController.addScreen("voting_view", FXMLLoader.load(new File("voting_view.fxml").toURI().toURL()));
-            screenController.addScreen("insert_barcode_view", FXMLLoader.load(new File("insert_barcode_view.fxml").toURI().toURL()));
-            screenController.activate("insert_barcode_view");
+            screenController.addScreen("text_view", FXMLLoader.load(new File("text_view.fxml").toURI().toURL()));
+            screenController.activate("text_view");
 
             primaryStage.setScene(scene);
             primaryStage.show();
-
-            BarcodeReader.addReader(this, scene);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -119,47 +117,4 @@ public class App extends Application implements BarcodeListener{
 
 
     }
-
-    @Override
-    public void onBarcodeRead(String barcode) {
-        System.out.println("hello barcode is read : " + barcode);
-        text.setText("Your barcode is : " + barcode + "\nConnecting to database...");
-        screenController.activate("voting_view");
-
-//        DatabaseReference ref = FirebaseEngine.database.getReference("users");
-//
-//        ValueEventListener postListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                boolean found = false;
-//                String key = "";
-//                String name = "";
-//                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-//                    Long barCode = postSnapshot.child("barCode").getValue(Long.class);
-//                    if(barCode.toString().equals(barcode)){
-//                        key = postSnapshot.getKey();
-//                        name = postSnapshot.child("name").getValue(String.class);
-//                        found = true;
-//                        break;
-//                    }
-//                }
-//                if(found){
-//                    screenController.activate("voting_view");
-////                    text.setText("Barcode found.\nKey : " + key + "\nName : " + name);
-//                    ;
-//                }
-//                else {
-////                    text.setText("Barcode not found.");
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                text.setText("Read failed.");
-//                System.out.println("The read failed: " + databaseError.getCode());
-//            }
-//        };
-//        ref.addListenerForSingleValueEvent(postListener);
-    }
-
 }

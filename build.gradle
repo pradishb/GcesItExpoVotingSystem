@@ -63,14 +63,3 @@ jfx {
 
     // for a full list of available settings, look the class "JavaFXGradlePluginExtension" on plugin project
 }
-
-sourceSets.main {
-    java {
-        srcDir 'src/main/java' //assume that your source codes are inside this path
-    }
-    resources {
-        srcDirs = ['src/main/java', 'src/main/resources']
-        exclude "**/*.java"
-    }
-}
-
