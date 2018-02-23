@@ -1,40 +1,20 @@
 package gces;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import io.grpc.internal.IoUtils;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.ListView;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
 
 public class App extends Application{
-    private Text text;
-    private Button btn;
-    private ListView<String> list = new ListView<>();
     static ScreenController screenController;
     static Scene scene;
+    static User currentUser;
+    static String currentUserKey;
+    static String currentProjectKey;
 
     public static void main(String[] args) {
         BarcodeReader x = new BarcodeReader();
@@ -100,21 +80,5 @@ public class App extends Application{
 //        ref.addListenerForSingleValueEvent(postListener);
 //
 //        list.setItems(items);
-//        list.setVisible(false);
-//
-//        StackPane root = new StackPane();
-//        text = new Text();
-//        text.setFont(new Font(45));
-//        text.setX(50);
-//        text.setY(150);
-//        text.setText("Scan the barcode...");
-//        root.getChildren().add(text);
-//        root.getChildren().add(list);
-//        Scene scene1 = new Scene(root, 700, 600);
-//
-
-
-
-
     }
 }

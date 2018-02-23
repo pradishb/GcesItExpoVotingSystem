@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
  *
  * @author pradish
  */
-public class FXMLDocumentController implements Initializable, BarcodeListener{
+public class TextViewController implements Initializable, BarcodeListener{
 
     @FXML
     private Text label;
