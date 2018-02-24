@@ -6,14 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gces.MainViewController">
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gces.MainViewController">
    <children>
-      <PieChart fx:id="piechart" layoutX="25.0" layoutY="47.0" prefHeight="518.0" prefWidth="655.0" />
-      <Text layoutX="25.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GCES IT EXTO LIVE RESULT">
-         <font>
-            <Font name="System Bold" size="32.0" />
-         </font>
-      </Text>
-      <Label fx:id="error_label" layoutX="25.0" layoutY="565.0" text="error_label" textFill="RED" visible="false" />
+      <PieChart fx:id="piechart" layoutY="60.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0" />
+      <Label fx:id="error_label" layoutX="25.0" layoutY="565.0" text="No internet connection" textFill="RED" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <HBox alignment="TOP_CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GCES IT EXPO LIVE RESULT">
+               <font>
+                  <Font name="System Bold" size="64.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

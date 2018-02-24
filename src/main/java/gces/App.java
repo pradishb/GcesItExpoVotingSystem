@@ -31,6 +31,8 @@ public class App extends Application{
             screenController.activate("main_view");
 
             primaryStage.setScene(scene);
+            primaryStage.setAlwaysOnTop(true);
+            primaryStage.setFullScreen(true);
             primaryStage.show();
         }
         catch (IOException e){

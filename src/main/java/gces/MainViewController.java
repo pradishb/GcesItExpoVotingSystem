@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 /**
@@ -27,18 +31,25 @@ public class MainViewController implements Initializable {
     @FXML
     PieChart piechart;
 
+    @FXML
+    Label error_label;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        ObservableList<PieChart.Data> pieChartDat =
-//                FXCollections.observableArrayList(
-//                        new PieChart.Data("Grapefruit", 13),
-//                        new PieChart.Data("Oranges", 25),
-//                        new PieChart.Data("Plums", 10),
-//                        new PieChart.Data("Pears", 22),
-//                        new PieChart.Data("Apples", 30));
-//        piechart.setData(pieChartDat);
-//        piechart.setTitle("Imported Fruits");
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+                if(InternetChecker.internetAvailable()){
+                    error_label.setVisible(false);
+                }
+                else{
+                    error_label.setVisible(true);
+                }
+            }
+        };
+
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
 
 
         DatabaseReference ref = FirebaseEngine.database.getReference();
@@ -67,7 +78,7 @@ public class MainViewController implements Initializable {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         };
-        ref.addListenerForSingleValueEvent(postListener);
+        ref.addValueEventListener(postListener);
 
     }
 }
