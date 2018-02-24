@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gces.TextViewController">
-    <children>
-      <Text fx:id="label" layoutX="105.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some Text" textAlignment="CENTER" wrappingWidth="589.6708984375" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="208.0">
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gces.TextViewController">
+   <children>
+      <Text fx:id="label" strokeType="OUTSIDE" strokeWidth="0.0" text="SOME DEFAULT TEXT">
          <font>
-            <Font size="32.0" />
+            <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-    </children>
-</AnchorPane>
+   </children>
+</StackPane>
