@@ -38,44 +38,5 @@ public class App extends Application{
         catch (IOException e){
             e.printStackTrace();
         }
-
-
-
-
-//        btn = new Button();
-//        btn.setText("Vote");
-//        btn.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                btn.setVisible(false);
-//                DatabaseReference ref = FirebaseEngine.database.getReference("votes");
-//                Vote myVote = new Vote("xx", "yy");
-//                ref.push().setValueAsync(myVote);
-//            }
-//        });
-//
-//
-//        //Scene1
-//        ObservableList<String> items = FXCollections.observableArrayList ();
-//
-//        DatabaseReference ref = FirebaseEngine.database.getReference("projects");
-//        ValueEventListener postListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-//                    String projectTitle = postSnapshot.child("title").getValue(String.class);
-//                    items.add(projectTitle);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                text.setText("Read failed.");
-//                System.out.println("The read failed: " + databaseError.getCode());
-//            }
-//        };
-//        ref.addListenerForSingleValueEvent(postListener);
-//
-//        list.setItems(items);
     }
 }

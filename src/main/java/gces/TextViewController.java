@@ -2,6 +2,7 @@ package gces;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,7 @@ public class TextViewController implements Initializable, BarcodeListener{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         BarcodeReader.addReader(this, App.scene);
-        label.setText("Insert your barcode");
+        label.setText("Insert your barcode...");
     }
 
     @Override
@@ -44,20 +45,61 @@ public class TextViewController implements Initializable, BarcodeListener{
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     boolean found = false;
                     String key = "";
-                    String name = "";
+                    User user = new User();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Long barCode = postSnapshot.child("barCode").getValue(Long.class);
                         if (barCode.toString().equals(barcode)) {
                             key = postSnapshot.getKey();
-                            name = postSnapshot.child("name").getValue(String.class);
+                            user = postSnapshot.getValue(User.class);
                             found = true;
                             break;
                         }
                     }
                     if (found) {
-                        App.screenController.activate("voting_view");
+                        final String myKey = key;
+                        final User myUser = user;
+                        DatabaseReference ref = FirebaseEngine.database.getReference("votes");
+
+                        ValueEventListener eventListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                boolean found = false;
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                    for (DataSnapshot ds1 : ds.getChildren()) {
+                                        System.out.println(ds1.getValue(String.class));
+                                        if (ds1.getValue(String.class).equals(myKey)) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if(found){
+                                        break;
+                                    }
+                                }
+
+                                if(!found){
+                                    listener.onUserFound(myUser, myKey);
+                                    App.screenController.activate("voting_view");
+                                    waitAndReset(0);
+                                }
+                                else {
+                                    label.setText("User has already voted.");
+                                    waitAndReset(2000);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+
+                        };
+                        ref.addListenerForSingleValueEvent(eventListener);
+
+
                     } else {
-                        label.setText("Barcode not found.");
+                        label.setText("Barcode with assigned user not found.");
+                        waitAndReset(2000);
+
                     }
                 }
 
@@ -70,15 +112,26 @@ public class TextViewController implements Initializable, BarcodeListener{
             ref.addListenerForSingleValueEvent(postListener);
         }
         else{
-            App.screenController.activate("voting_view");
-            listener.onUserFound(new User(100, "Pradish", "9814133236"), "xxxx");
             label.setText("Please check your internet connectivity.");
+            waitAndReset(2000);
         }
 
     }
 
     public static void setUserFoundListener(UserFoundListener listener){
         TextViewController.listener = listener;
+    }
+
+    public void waitAndReset(long delay){
+        new Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        label.setText("Insert your barcode...");
+                    }
+                },
+                delay
+        );
     }
 
 }
