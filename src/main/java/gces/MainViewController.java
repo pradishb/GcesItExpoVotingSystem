@@ -42,17 +42,21 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         piechart.setData(pieChartData);
-        Runnable helloRunnable = new Runnable() {
-            public void run() {
 
-                if(InternetChecker.internetAvailable()){
+        Timer t = new Timer();
+
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(InternetChecker.internetAvailable())
+                {
                     error_label.setVisible(false);
                 }
                 else{
                     error_label.setVisible(true);
                 }
             }
-        };
+        }, 0, 2000);
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 //        executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);

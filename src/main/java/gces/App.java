@@ -19,6 +19,12 @@ public class App extends Application{
     }
 
     @Override
+    public void stop() throws Exception {
+        super.stop();
+        System.exit(0);
+    }
+
+    @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Hello World!");
 
