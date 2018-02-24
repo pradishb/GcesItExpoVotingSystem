@@ -48,11 +48,16 @@ public class TextViewController implements Initializable, BarcodeListener{
                     User user = new User();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Long barCode = postSnapshot.child("barCode").getValue(Long.class);
-                        if (barCode.toString().equals(barcode)) {
-                            key = postSnapshot.getKey();
-                            user = postSnapshot.getValue(User.class);
-                            found = true;
-                            break;
+                        try {
+                            if (barCode == Long.parseLong(barcode)) {
+                                key = postSnapshot.getKey();
+                                user = postSnapshot.getValue(User.class);
+                                found = true;
+                                break;
+                            }
+                        }
+                        catch (NumberFormatException e){
+
                         }
                     }
                     if (found) {
