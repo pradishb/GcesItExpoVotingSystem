@@ -26,7 +26,7 @@ public class App extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("GcesItExpoLiveResult");
 
 
         try {
