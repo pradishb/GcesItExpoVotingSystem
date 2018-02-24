@@ -30,10 +30,15 @@ import java.util.concurrent.FutureTask;
  *
  * @author pradish
  */
+
+interface SuccessListener{
+    public void onSuccess();
+}
 public class VotingViewController implements Initializable, UserFoundListener{
     private String userKey;
     private List<String> projectKeyList;
     private boolean found = false;
+    private static SuccessListener listener;
 
     @FXML
     private Label barcode_label;
@@ -67,6 +72,7 @@ public class VotingViewController implements Initializable, UserFoundListener{
                 task.addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(Task<Void> task) {
+                        listener.onSuccess();
                         App.screenController.activate("text_view");
                         vote_btn.setDisable(false);
                     }
@@ -129,5 +135,9 @@ public class VotingViewController implements Initializable, UserFoundListener{
             error_label.setVisible(true);
             error_label.setText("Please check your internet connectivity");
         }
+    }
+
+    public static void addSuccessListener(SuccessListener listener){
+        VotingViewController.listener = listener;
     }
 }

@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -20,7 +21,7 @@ import javafx.scene.text.Text;
 interface UserFoundListener{
     public void onUserFound(User user, String userKey);
 }
-public class TextViewController implements Initializable, BarcodeListener{
+public class TextViewController implements Initializable, BarcodeListener, SuccessListener{
     private static UserFoundListener listener;
 
     @FXML
@@ -28,6 +29,7 @@ public class TextViewController implements Initializable, BarcodeListener{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        VotingViewController.addSuccessListener(this);
         BarcodeReader.addReader(this, App.scene);
         label.setText("Insert your barcode...");
     }
@@ -35,6 +37,7 @@ public class TextViewController implements Initializable, BarcodeListener{
     @Override
     public void onBarcodeRead(String barcode) {
         System.out.println("Barcode read : " + barcode);
+        label.setFill(Color.BLACK);
         label.setText("Your barcode is : " + barcode + "\nConnecting to database...");
 
         if(InternetChecker.internetAvailable()) {
@@ -88,6 +91,7 @@ public class TextViewController implements Initializable, BarcodeListener{
                                     waitAndReset(0);
                                 }
                                 else {
+                                    label.setFill(Color.RED);
                                     label.setText("User has already voted.");
                                     waitAndReset(2000);
                                 }
@@ -102,6 +106,7 @@ public class TextViewController implements Initializable, BarcodeListener{
 
 
                     } else {
+                        label.setFill(Color.RED);
                         label.setText("Barcode with assigned user not found.");
                         waitAndReset(2000);
 
@@ -117,6 +122,7 @@ public class TextViewController implements Initializable, BarcodeListener{
             ref.addListenerForSingleValueEvent(postListener);
         }
         else{
+            label.setFill(Color.RED);
             label.setText("Please check your internet connectivity.");
             waitAndReset(2000);
         }
@@ -132,6 +138,7 @@ public class TextViewController implements Initializable, BarcodeListener{
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
+                        label.setFill(Color.BLACK);
                         label.setText("Insert your barcode...");
                     }
                 },
@@ -139,4 +146,10 @@ public class TextViewController implements Initializable, BarcodeListener{
         );
     }
 
+    @Override
+    public void onSuccess() {
+        label.setFill(Color.GREEN);
+        label.setText("You have successfully voted!");
+        waitAndReset(3000);
+    }
 }
