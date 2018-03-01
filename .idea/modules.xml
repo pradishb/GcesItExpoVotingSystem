@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem_main.iml" group="GcesItExpoVotingSystem" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoVotingSystem_test.iml" group="GcesItExpoVotingSystem" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult_main.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult_main.iml" group="GcesItExpoLiveResult" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult_test.iml" filepath="$PROJECT_DIR$/.idea/modules/GcesItExpoLiveResult_test.iml" group="GcesItExpoLiveResult" />
     </modules>
   </component>
 </project>

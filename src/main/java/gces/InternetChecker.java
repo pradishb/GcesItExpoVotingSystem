@@ -10,7 +10,7 @@ public class InternetChecker {
 
     public static boolean internetAvailable(){
         try {
-            return InetAddress.getByName("www.google.com").isReachable(200);
+            return InetAddress.getByName("www.google.com").isReachable(1500);
         }
         catch (IOException e){
             return false;
