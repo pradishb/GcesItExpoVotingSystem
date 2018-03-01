@@ -104,21 +104,19 @@ public class VotingViewController implements Initializable, UserFoundListener{
 
         if(InternetChecker.internetAvailable()) {
             error_label.setVisible(false);
+            ObservableList<String> items = FXCollections.observableArrayList();
 
             DatabaseReference ref = FirebaseEngine.database.getReference("projects");
             ValueEventListener postListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     List<String> myKeyList = new ArrayList<>();
-                    ObservableList<String> myItems = FXCollections.observableArrayList();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         String projectTitle = postSnapshot.child("title").getValue(String.class);
                         String projectKey = postSnapshot.getKey();
                         myKeyList.add(projectKey);
-                        System.out.println(projectTitle);
-                        myItems.add(projectTitle);
+                        items.add(projectTitle);
                     }
-                    projects_list.setItems(myItems);
                     projectKeyList = myKeyList;
                 }
 
@@ -130,6 +128,7 @@ public class VotingViewController implements Initializable, UserFoundListener{
             };
             ref.addListenerForSingleValueEvent(postListener);
 
+            projects_list.setItems(items);
         }
         else{
             error_label.setVisible(true);
